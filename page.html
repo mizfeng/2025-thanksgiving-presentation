@@ -5,19 +5,26 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <title>2025 曼陀劇坊 感恩節展演</title>
-    <meta name="viewport" content="width=1122, height=794, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
+        html,
         body {
             margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
             background-color: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        }
+
+        .wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: top left;
         }
 
         .page-container {
-            position: absolute;
+            position: relative;
             width: 1122px;
             height: 794px;
             overflow: hidden;
@@ -51,9 +58,11 @@
 </head>
 
 <body>
-    <div class="page-container" id="container">
-        <img id="bg" src="" alt="背景圖" />
-        <!-- 熱區由 JS 動態插入 -->
+    <div class="wrapper">
+        <div class="page-container" id="container">
+            <img id="bg" src="" alt="背景圖" />
+            <!-- 熱區由 JS 動態插入 -->
+        </div>
     </div>
 
     <script>
@@ -138,24 +147,27 @@
         preloadAllImages();
 
         function scaleContainerToScreen() {
-            const container = document.querySelector('.page-container');
+
+
+
+            const wrapper = document.querySelector('.wrapper');
             const screenHeight = screen.height;
             const screenWidth = screen.width;
 
             const baseHeight = 794; // 頁面原始高度
-            const baseWidth = 1122; // 頁面原始寬度
-            const scale = Math.min(screenWidth / baseWidth, screenHeight / baseHeight);
+            const baseWidth = 1122;; // 頁面原始寬度
+            const scale = Math.min(screenWidth / baseWidth, screenHeight / baseHeight) * 0.95;
 
-            container.style.transform = `scale(${scale})`;
-            container.style.transformOrigin = 'top left';
 
-            // 若你想置中（水平）：
-            container.style.position = 'absolute';
-            container.style.left = `${(screenWidth - baseWidth * scale) / 2}px`;
-            container.style.top = `${(screenHeight - baseHeight * scale) / 2}px`;
+            wrapper.style.transform = `scale(${scale})`;
+            wrapper.style.left = `${(screenWidth - baseWidth * scale) / 2}px`;
+
+            wrapper.style.top = `${(screenHeight - baseHeight * scale) / 2 - 50}px`;
         }
-        scaleContainerToScreen();
+
         window.addEventListener('resize', scaleContainerToScreen);
+        window.addEventListener('orientationchange', scaleContainerToScreen);
+        scaleContainerToScreen();
 
         setupPage(page);
     </script>
