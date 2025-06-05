@@ -127,6 +127,17 @@
             }
         }
 
+        // 預先載入所有 19 張圖片
+        function preloadAllImages() {
+            for (let i = 1; i <= 19; i++) {
+                const img = new Image();
+                img.src = `img/${i}.jpg`;
+            }
+        }
+
+        preloadAllImages();
+
+
         setupPage(page);
     </script>
 </body>
