@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <title>2025 曼陀劇坊 感恩節展演</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=1122, height=794, initial-scale=1.0" />
     <style>
         body {
             margin: 0;
@@ -17,7 +17,7 @@
         }
 
         .page-container {
-            position: relative;
+            position: absolute;
             width: 1122px;
             height: 794px;
             overflow: hidden;
@@ -137,6 +137,25 @@
 
         preloadAllImages();
 
+        function scaleContainerToScreen() {
+            const container = document.querySelector('.page-container');
+            const screenHeight = screen.height;
+            const screenWidth = screen.width;
+
+            const baseHeight = 794; // 頁面原始高度
+            const baseWidth = 1122; // 頁面原始寬度
+            const scale = Math.min(screenWidth / baseWidth, screenHeight / baseHeight);
+
+            container.style.transform = `scale(${scale})`;
+            container.style.transformOrigin = 'top left';
+
+            // 若你想置中（水平）：
+            container.style.position = 'absolute';
+            container.style.left = `${(screenWidth - baseWidth * scale) / 2}px`;
+            container.style.top = `${(screenHeight - baseHeight * scale) / 2}px`;
+        }
+        scaleContainerToScreen();
+        window.addEventListener('resize', scaleContainerToScreen);
 
         setupPage(page);
     </script>
