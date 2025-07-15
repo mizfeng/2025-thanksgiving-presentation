@@ -102,7 +102,7 @@
                     addHotspot(110, 85, 135, 155, "2"); // 左上-製作團隊
                     addHotspot(440, 400, 105, 65, "4"); // 馮德曼
                     addHotspot(545, 400, 105, 65, "5"); // 高秋華
-                    addHotspot(340, 465, 100, 60, "6"); // 韓汝晶
+                    addHotspot(340, 465, 100, 60, "6-1"); // 韓汝晶
                     addHotspot(440, 465, 105, 60, "7"); // 齊安平
                     addHotspot(545, 465, 105, 60, "8"); // 石鴻珍
                     addHotspot(650, 465, 105, 60, "9"); // 顧稀文
@@ -125,7 +125,13 @@
                     addHotspot(750, 540, 250, 80, "19"); // 法場換子
                     break;
                 default:
-                    if (Number(p) >= 4 && Number(p) <= 11) {
+                    if (p == "6-1") {
+                        // 如果是韓汝晶第一頁，到第二頁
+                        addHotspot(0, 0, 1122, 794, "6-2");
+                    } else if (p == "6-2") {
+                        // 如果是韓汝晶第二頁，回到首頁
+                        addHotspot(0, 0, 1122, 794, "1");
+                    } else if (Number(p) >= 4 && Number(p) <= 11) {
                         // 人名頁面：回首頁
                         addHotspot(0, 0, 1122, 794, "1");
                     } else if (Number(p) >= 12 && Number(p) <= 19) {
@@ -138,8 +144,15 @@
         // 預先載入所有 19 張圖片
         function preloadAllImages() {
             for (let i = 1; i <= 19; i++) {
-                const img = new Image();
-                img.src = `img/${i}.jpg`;
+                if (i == 16) {
+                    // 韓汝晶的兩張圖片，特例處理
+                    const img = new Image();
+                    img.src = `img/16-1.jpg`;
+                    img.src = `img/16-2.jpg`;
+                } else {
+                    const img = new Image();
+                    img.src = `img/${i}.jpg`;
+                }
             }
         }
 
