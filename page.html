@@ -110,8 +110,8 @@
                     addHotspot(545, 525, 105, 55, "11"); // 張雅君
                     break;
                 case "2":
-                    // 製作團隊 - 回首頁ㄋ
-                    addHotspot(0, 0, 1122, 794, "1");
+                    // 製作團隊 - 到頁20指導單位
+                    addHotspot(0, 0, 1122, 794, "20");
                     break;
                 case "3":
                     addHotspot(380, 230, 340, 385, "1"); // 回首頁
@@ -124,6 +124,9 @@
                     addHotspot(750, 450, 250, 80, "18"); // 爛柯山-痴夢
                     addHotspot(750, 540, 250, 80, "19"); // 法場換子
                     break;
+                case "20":
+                    // 指導單位 - 回首頁
+                    addHotspot(0, 0, 1122, 794, "1");
                 default:
                     if (p == "6-1") {
                         // 如果是韓汝晶第一頁，到第二頁
@@ -141,14 +144,14 @@
             }
         }
 
-        // 預先載入所有 19 張圖片
+        // 預先載入所有 21 張圖片
         function preloadAllImages() {
-            for (let i = 1; i <= 19; i++) {
-                if (i == 16) {
+            for (let i = 1; i <= 20; i++) {
+                if (i == 6) {
                     // 韓汝晶的兩張圖片，特例處理
                     const img = new Image();
-                    img.src = `img/16-1.jpg`;
-                    img.src = `img/16-2.jpg`;
+                    img.src = `img/6-1.jpg`;
+                    img.src = `img/6-2.jpg`;
                 } else {
                     const img = new Image();
                     img.src = `img/${i}.jpg`;
