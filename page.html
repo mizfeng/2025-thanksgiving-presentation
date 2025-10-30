@@ -46,13 +46,16 @@
             position: absolute;
             background: rgba(255, 0, 0, 0);
             /* 初始可見，便於對位 */
-            border: 1px solid rgba(255, 0, 0, 0);
+            border: 1px solid rgb(36, 19, 15, 0.001);
+            border-radius: 8px;
             cursor: pointer;
             z-index: 1;
+            box-shadow: 0 0 8px rgb(0, 0, 0, 0.5);
         }
 
         .hotspot:hover {
-            background: rgba(255, 0, 0, 0.05);
+            box-shadow: 0 0 8px rgb(0, 0, 0);
+            background: rgba(207, 158, 98, 0.001);
         }
     </style>
 </head>
@@ -97,24 +100,26 @@
             clearHotspots();
             switch (p) {
                 case "1":
+                    console.log("到頁1 首頁");
                     // 首頁：左上 → Page2、人名 → Page4~11、其餘 → Page3
                     addHotspot(0, 0, 1122, 794, "3"); // 其他區域-節目表
-                    addHotspot(110, 85, 135, 155, "2"); // 左上-製作團隊
-                    addHotspot(440, 400, 105, 65, "4"); // 馮德曼
-                    addHotspot(545, 400, 105, 65, "5"); // 高秋華
-                    addHotspot(340, 465, 100, 60, "6-1"); // 韓汝晶
-                    addHotspot(440, 465, 105, 60, "7"); // 齊安平
-                    addHotspot(545, 465, 105, 60, "8"); // 石鴻珍
-                    addHotspot(650, 465, 105, 60, "9"); // 顧稀文
-                    addHotspot(440, 525, 105, 55, "10"); // 劉祖光
-                    addHotspot(545, 525, 105, 55, "11"); // 張雅君
+                    addHotspot(110, 85, 135, 140, "2"); // 左上-製作團隊
+                    addHotspot(425, 405, 110, 65, "4"); // 馮德曼
+                    addHotspot(580, 405, 110, 65, "5"); // 高秋華
+                    addHotspot(265, 485, 110, 60, "6-1"); // 韓汝晶
+                    addHotspot(425, 485, 110, 60, "7"); // 齊安平
+                    addHotspot(580, 485, 110, 60, "8"); // 石鴻珍
+                    addHotspot(745, 485, 110, 60, "9"); // 顧稀文
+                    addHotspot(425, 570, 110, 55, "10"); // 劉祖光
+                    addHotspot(580, 570, 110, 55, "11"); // 張雅君
                     break;
                 case "2":
-                    // 製作團隊 - 到頁20指導單位
-                    addHotspot(0, 0, 1122, 794, "20");
+                    // 製作團隊 - 拆Part1 - 到頁21 Part2
+                    addHotspot(0, 0, 1122, 794, "21");
                     break;
                 case "3":
-                    addHotspot(380, 230, 340, 385, "1"); // 回首頁
+                    // addHotspot(380, 230, 340, 385, "1"); // 回首頁
+                    addHotspot(0, 0, 1122, 794, "1");
                     addHotspot(110, 270, 250, 80, "12"); // 掛画
                     addHotspot(110, 360, 250, 80, "13"); // 四郎探母-坐宮
                     addHotspot(110, 450, 250, 80, "14"); // 穆桂英-捧印
@@ -127,6 +132,11 @@
                 case "20":
                     // 指導單位 - 回首頁
                     addHotspot(0, 0, 1122, 794, "1");
+                    break;
+                case "21":
+                    // 製作團隊 Part - 到頁20 指導單位
+                    addHotspot(0, 0, 1122, 794, "20");
+                    break;
                 default:
                     if (p == "6-1") {
                         // 如果是韓汝晶第一頁，到第二頁
