@@ -50,12 +50,24 @@
             border-radius: 8px;
             cursor: pointer;
             z-index: 1;
-            box-shadow: 0 0 8px rgb(0, 0, 0, 0.5);
+            /* box-shadow: 0 0 8px rgb(255, 0, 0, 0.5); */
         }
 
         .hotspot:hover {
-            box-shadow: 0 0 8px rgb(0, 0, 0);
-            background: rgba(207, 158, 98, 0.001);
+            /* box-shadow: 0 0 8px rgb(255, 0, 0); */
+            /* background: rgba(255, 0, 0, 0.5); */
+            border-bottom: 3px solid rgb(114, 0, 0, 1);
+        }
+
+        .hotspot2 {
+            position: absolute;
+            background: rgba(255, 0, 0, 0);
+            /* 初始可見，便於對位 */
+            border: 1px solid rgb(36, 19, 15, 0.001);
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 1;
+            /* box-shadow: 0 0 8px rgb(255, 0, 0, 0.5); */
         }
     </style>
 </head>
@@ -79,9 +91,14 @@
             setupPage(p);
         }
 
-        function addHotspot(x, y, w, h, targetPage) {
+        function addHotspot(x, y, w, h, targetPage, type = true) {
             const a = document.createElement("div");
-            a.className = "hotspot";
+            if (type) {
+                a.className = "hotspot";
+            } else {
+                // 移除hover的效果
+                a.className = "hotspot2";
+            }
             a.style.left = x + "px";
             a.style.top = y + "px";
             a.style.width = w + "px";
@@ -93,6 +110,7 @@
         // 清除既有熱區（若有切換）
         function clearHotspots() {
             document.querySelectorAll(".hotspot").forEach((el) => el.remove());
+            document.querySelectorAll(".hotspot2").forEach((el) => el.remove());
         }
 
         // 建立當前頁面的互動邏輯
@@ -102,7 +120,7 @@
                 case "1":
                     console.log("到頁1 首頁");
                     // 首頁：左上 → Page2、人名 → Page4~11、其餘 → Page3
-                    addHotspot(0, 0, 1122, 794, "3"); // 其他區域-節目表
+                    addHotspot(0, 0, 1122, 794, "3", false); // 其他區域-節目表
                     addHotspot(110, 85, 135, 140, "2"); // 左上-製作團隊
                     addHotspot(425, 405, 110, 65, "4"); // 馮德曼
                     addHotspot(580, 405, 110, 65, "5"); // 高秋華
@@ -115,11 +133,11 @@
                     break;
                 case "2":
                     // 製作團隊 - 拆Part1 - 到頁21 Part2
-                    addHotspot(0, 0, 1122, 794, "21");
+                    addHotspot(0, 0, 1122, 794, "21", false);
                     break;
                 case "3":
                     // addHotspot(380, 230, 340, 385, "1"); // 回首頁
-                    addHotspot(0, 0, 1122, 794, "1");
+                    addHotspot(0, 0, 1122, 794, "1", false);
                     addHotspot(110, 270, 250, 80, "12"); // 掛画
                     addHotspot(110, 360, 250, 80, "13"); // 四郎探母-坐宮
                     addHotspot(110, 450, 250, 80, "14"); // 穆桂英-捧印
@@ -131,25 +149,25 @@
                     break;
                 case "20":
                     // 指導單位 - 回首頁
-                    addHotspot(0, 0, 1122, 794, "1");
+                    addHotspot(0, 0, 1122, 794, "1", false);
                     break;
                 case "21":
                     // 製作團隊 Part - 到頁20 指導單位
-                    addHotspot(0, 0, 1122, 794, "20");
+                    addHotspot(0, 0, 1122, 794, "20", false);
                     break;
                 default:
                     if (p == "6-1") {
                         // 如果是韓汝晶第一頁，到第二頁
-                        addHotspot(0, 0, 1122, 794, "6-2");
+                        addHotspot(0, 0, 1122, 794, "6-2", false);
                     } else if (p == "6-2") {
                         // 如果是韓汝晶第二頁，回到首頁
-                        addHotspot(0, 0, 1122, 794, "1");
+                        addHotspot(0, 0, 1122, 794, "1", false);
                     } else if (Number(p) >= 4 && Number(p) <= 11) {
                         // 人名頁面：回首頁
-                        addHotspot(0, 0, 1122, 794, "1");
+                        addHotspot(0, 0, 1122, 794, "1", false);
                     } else if (Number(p) >= 12 && Number(p) <= 19) {
                         // 節目頁面：回節目表
-                        addHotspot(0, 0, 1122, 794, "3");
+                        addHotspot(0, 0, 1122, 794, "3", false);
                     }
             }
         }
